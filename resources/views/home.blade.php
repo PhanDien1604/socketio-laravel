@@ -38,11 +38,13 @@
                         {{-- content messages --}}
                     </div>
 
-                    <form id="form-chat" action="" method="get">
-                        <input type="hidden" class="receiver_id" name="receiver_id" value="{{ $friend['id'] }}">
+                    <form id="form-chat" action="{{ route('sendMessages') }}" method="post">
+                        @csrf
+                        <input type="hidden" class="receiver_id" name="receiver_id" value="">
+                        <input type="hidden" class="sender_id" name="sender_id" value="{{ auth()->user()->id }}">
 
                         <div class="form-group mt-3">
-                            <textarea id="content-message" class="form-control" rows="5" placeholder="Enter your message" required></textarea>
+                            <textarea id="content-message" class="form-control" rows="5" name="message" placeholder="Enter your message" required></textarea>
                             <button id="form-submit" class="btn btn-success mt-3">Submit</button>
                         </div>
                     </form>

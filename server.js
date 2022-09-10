@@ -13,11 +13,16 @@ server.listen(3000, () => {
     console.log('listening on *:3000');
 });
 
+const users = [];
+
 io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('chat message', function(msg) {
-        console.log('message: ' + msg);
-        io.emit('chat message', msg);
+    console.log(socket.id);
+    socket.on("user connected", function(user_id) {
+        users[user_id] = socket.id
+    })
+
+    socket.on('send message', function(sender_id, receiver_id, message) {
+        io.to(users[receiver_id]).emit('new message', [sender_id, receiver_id, message]);
     })
 });
 

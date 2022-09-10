@@ -18,4 +18,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/send-message', [App\Http\Controllers\HomeController::class, 'sendMessages'])->name('sendMessages');
+Route::post('api/send-message', [App\Http\Controllers\HomeController::class, 'sendMessages'])->name('sendMessages');
+
+Route::get('api/get-message', [App\Http\Controllers\HomeController::class, 'getMessages'])->name('getMessages');
+
